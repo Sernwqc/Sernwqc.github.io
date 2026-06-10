@@ -66,16 +66,24 @@ body {
 
 .model-photo {
     position: absolute;
-    top: clamp(10px, 12vh, 60px);
-    right: -10vh;
-
-    width: 120%;
-    height: 100%;
-
-    object-fit:contain;
+    bottom: 0;        /* Жестко прижимаем к самому низу экрана, чтобы не висела в воздухе */
+    right: 0;         /* Жестко прижимаем к правому краю устройства */
     
+    /* Размеры: */
+    width: 60vw;      /* Картинка ВСЕГДА занимает ровно 60% от ширины любого экрана */
+    height: 90vh;     /* И ровно 90% от высоты экрана, оставляя место сверху под заголовок */
+    
+    /* Масштаб и позиционирование внутри контейнера: */
+    object-fit: contain;      /* Картинка масштабируется пропорционально и никогда не сожмется */
+    object-position: right bottom; /* Внутри своего блока девушка всегда прижата к правому нижнему углу */
+    
+    z-index: 1;
+    pointer-events: none;
+    
+    /* Твоя плавная анимация */
     animation: gentle-wave 4s ease-in-out infinite;
 }
+
 
 @keyframes gentle-wave {
     0%, 100% {
@@ -350,6 +358,10 @@ body {
     .contact-btn { max-width: 420px; padding: 18px 26px; font-size: 16px; }
 }
 
+
+
+/* Единственное исключение для больших мониторов (десктопов), чтобы она не была гигантской */
+
 @media (min-width: 1024px) {
     body {
         background: radial-gradient(ellipse at center, #2a2a2a 0%, #0a0a0a 100%);
@@ -363,9 +375,8 @@ body {
     }
 
     .model-photo {
-        top: 100px;
-        width: 65%;
-        height: 94%;
+        width: 45vw;  /* На компах делаем чуть уже (45% экрана), так как экран слишком широкий */
+        height: 85vh; /* Чуть уменьшаем высоту для аккуратности */
     }
 
     .gradient-left { width: 48%; }
