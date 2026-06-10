@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна Почанина | Твой стилист</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="mobile-container">
+
+        <div class="background-layer">
+
+            <div class="glow-orb glow-top-left"></div>
+            <div class="glow-orb glow-bottom-right"></div>
+
+            <div class="gradient-top"></div>
+            <div class="gradient-left"></div>
+            <img src="imgs/IMG_3614.png" alt="Анна Почанина" class="model-photo">
+        </div>
+
+        <div class="content-layer">
+
+            <header class="hero-header sticky-header">
+                <h1>Анна Почанина</h1>
+                <h2>Твой Cтилист</h2>
+            </header>
+
+            <div class="scrolling-content-left">
+
+                <div class="text-block reveal-block">
+                    <p class="greeting">
+                        Привет! Ты на моей страничке,<br>
+                        а значит тебя ждёт какое-то событие.<br>
+                        И у тебя хороший вкус! ;)<br>
+                        Ты сделал правильный выбор! :)
+                    </p>
+                    <div class="scroll-down inviting-bounce">
+                        <div class="scroll-circle">
+                            <img src="imgs/arrow.png" alt="↓">
+                        </div>
+                        <span>Листай<br>вниз</span>
+                    </div>
+                </div>
+
+                <div class="text-block reveal-block">
+                    <p class="about-text">
+                        Меня зовут Анна, я сертифицированный визажист, стилист по прическам и бровист с опытом работы более 10-ти лет
+                    </p>
+                </div>
+
+                <div class="text-block reveal-block">
+                    <p class="about-text">
+                        Являюсь художником-стилистом на телевидении. Красила именитых ведущих и министров. Я не просто делаю макияж, а вызываю зависимость от себя в дальнейшем.
+                    </p>
+                </div>
+
+                <div class="text-block reveal-block">
+                    <p class="about-text">
+                        Выполняю все виды макияжа. Обращаю внимание на индивидуальные особенности и ваши пожелания. Могу собрать образ целиком и полностью
+                    </p>
+                </div>
+
+                <div class="text-block reveal-block">
+                    <p class="about-text">
+                        За час ваш образ уже будет готов! Делаю быстро и качественно, не успеете моргнуть и не сможете отвести от себя глаз
+                    </p>
+                </div>
+
+                <div class="text-block reveal-block contacts-block">
+                    <h3 class="contacts-title">Контакты:</h3>
+
+                    <a href="https://t.me/anya_pochanina" class="contact-btn">
+                        <span class="icon"><span class="icon"><img src="imgs/telegram.png" alt="✈"></span></span>
+                        <span class="label">Telegram</span>
+                    </a>
+
+                    <a href="https://www.instagram.com/anya_pochanina?igsh=eWJsbHR0cDlmYmh3&utm_source=qr" class="contact-btn">
+                        <span class="icon"><img src="imgs/instagram.png" alt="📷"></span>
+                        <span class="label">Instagram</span>
+                    </a>
+
+                    <a href="" class="contact-btn">
+                        <span class="icon"><img src="imgs/whatsapp.png" alt="Whatsapp"></span>
+                        <span class="label">WhatsApp</span>
+                    </a>
+
+                    <a href="https://max.ru/u/f9LHodD0cOJkM_Bp0koirmldXLwX1CtXaEk2B60dm2QkYewI6q15ZnhVsyM" class="contact-btn">
+                        <span class="icon"><img src="imgs/max.png" alt="💬"></span>
+                        <span class="label">MAX</span>
+                    </a>
+
+                    <div class="contact-info">
+                        <p>tel.:</p> 
+                            <a href="tel:+7(919)-847-69-59" style="color: #ffffff">+7(919)-847-69-59</a>
+
+                        <p>e-mail:</p>
+                        <a href="mailto:a.pochanina@gmail.com" style="color: white">a.pochanina@gmail.com</a>
+                            
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+       
+    const content = document.querySelector('.content-layer');
+    const header = document.querySelector('.sticky-header');
+    const revealBlocks = document.querySelectorAll('.reveal-block');
+
+    const glowTop = document.querySelector('.glow-top-left');
+    const glowBottom = document.querySelector('.glow-bottom-right');
+
+    content.addEventListener('scroll', () => {
+        const scrollY = content.scrollTop;
+
+        const scale = Math.max(0.75, 1 - scrollY * 0.0008);
+        header.style.transform = `scale(${scale})`;
+        header.style.transformOrigin = 'top center';
+
+        if (glowTop) {
+            glowTop.style.transform = `translateY(${scrollY * 0.2}px)`;
+        }
+        if (glowBottom) {
+            glowBottom.style.transform = `translateY(${scrollY * -0.2}px)`;
+        }
+    });
+
+    const observerOptions = {
+        root: content,
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, observerOptions);
+
+    revealBlocks.forEach(block => observer.observe(block));
+    </script>
+
+    
+</body>
+</html>
