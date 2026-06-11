@@ -71,11 +71,17 @@ body {
     position: absolute;
     bottom: 0;        
     right: 0;         
-    width: 80vw;       /* На мобильных занимает 80% ширины, чтобы выглядеть эффектно */
-    height: 85vh;      /* Оставляем запас сверху, чтобы не перекрывать заголовок изначально */
-    max-width: 100%;   
+    
+    /* Игнорируем ширину, фиксируем ТОЛЬКО высоту. 
+       Девушка займет 90% от всей высоты экрана смартфона и станет ОЧЕНЬ крупной */
+    height: 90vh;     
+    width: auto;      
+    
+    /* Картинка будет масштабироваться по высоте, а лишние бока (если они есть) 
+       просто уйдут за правый край экрана, сохраняя масштаб тела и лица */
     object-fit: contain;      
     object-position: right bottom; 
+    
     z-index: 1;
     pointer-events: none;
     animation: gentle-wave 4s ease-in-out infinite;
@@ -330,12 +336,14 @@ body {
 /* Планшеты */
 @media (min-width: 768px) {
     .model-photo {
-        width: auto;
-        height: 90vh;
-        max-width: 50vw; /* На больших экранах возвращаем ограничение в половину дисплея */
+        height: 95vh;
+        max-width: 48vw; /* На компах возвращаем ограничение ширины в пол-экрана */
     }
     .scrolling-content-left {
-        max-width: 50%;
+        max-width: 48%;
+    }
+    .sticky-header {
+        text-align: left; /* На компах сдвигаем влево, к тексту */
     }
     .sticky-header h1 { font-size: 46px; }
     .sticky-header h2 { font-size: 42px; padding-left: 20px; }
