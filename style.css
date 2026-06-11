@@ -174,15 +174,18 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center; 
+        
     scroll-snap-align: start; 
+    
+    /* ХАРДКОРНЫЙ ФИКС: Полностью удаляем transform: translateY */
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
-    transition: opacity 0.5s ease, transform 0.5s ease; 
+    transition: opacity 0.4s ease; /* Оставляем только деликатное проявление глазами */
 }
 
+/* Когда блок становится активным, он просто мягко проявляется на месте */
 .text-block.visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    /* Никаких transform: translateY(0) здесь быть не должно! */
 }
 
 /* СТИЛИ ТЕКСТА И КНОПОК */
