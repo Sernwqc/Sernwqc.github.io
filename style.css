@@ -72,15 +72,13 @@ body {
     bottom: 0;        
     right: 0;         
     
-    /* Игнорируем ширину, фиксируем ТОЛЬКО высоту. 
-       Девушка займет 90% от всей высоты экрана смартфона и станет ОЧЕНЬ крупной */
-    height: 90vh;     
-    width: auto;      
+    /* Переходим на проценты! Теперь размеры привязаны к карточке, а не к монитору */
+    width: 62%;        /* Занимает чуть больше половины ширины на мобилке */
+    height: 75%;       /* Занимает 75% высоты. Верхние 25% карточки гарантированно свободны под заголовок! */
     
-    /* Картинка будет масштабироваться по высоте, а лишние бока (если они есть) 
-       просто уйдут за правый край экрана, сохраняя масштаб тела и лица */
-    object-fit: contain;      
-    object-position: right bottom; 
+    /* Красиво заполняем выделенный ей коридор, удерживая лицо в фокусе */
+    object-fit: cover;      
+    object-position: center top; 
     
     z-index: 1;
     pointer-events: none;
@@ -136,18 +134,13 @@ body {
 /* ХЕДЕР: Лекарство от наезда текста */
 .sticky-header {
     position: sticky;
-    top: 0;
+    top: 8vh;
     z-index: 10;
-    text-align: center; 
+    text-align: center;
     padding-top: 25px;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    will-change: transform;
+    padding-bottom: 15px;
+    margin-bottom: 0;
     
-    /* Чистый фон без серой грязи + размытие проплывающего снизу текста */
-    background: transparent; 
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
 }
 
 /* Добавляем тексту хедера плотную тень, чтобы он «читался» на любом фоне */
@@ -169,10 +162,12 @@ body {
 
 /* ТЕКСТОВАЯ КОЛОНКА (Жесткий барьер безопасности) */
 .scrolling-content-left {
-    max-width: 65%;    /* На мобилках даем тексту чуть больше свободы */
+    max-width: 55%; /* Ограничиваем текст, чтобы он не лез на лицо */
     position: relative;
     z-index: 5;
 }
+
+
 .text-block {
     height: 100vh; 
     min-height: 100vh;
@@ -335,18 +330,19 @@ body {
 
 /* Планшеты */
 @media (min-width: 768px) {
+   
+    
+    /* ЖЕСТКИЙ СБРОС ДЛЯ ДЕСКТОПА: загоняем фотку на её законное место */
     .model-photo {
-        height: 95vh;
-        max-width: 48vw; /* На компах возвращаем ограничение ширины в пол-экрана */
+        width: 50%;           /* Ровно правая половина серой карточки */
+        height: 100%;          /* Во всю высоту карточки от края до края */
+        bottom: 0;
+        right: 0;
+        object-fit: contain;   /* Вся фигура гарантированно помещается целиком, НИЧЕГО не обрезается */
+        object-position: right bottom; /* Аккуратно прижимаем к правому нижнему углу */
     }
-    .scrolling-content-left {
-        max-width: 48%;
-    }
-    .sticky-header {
-        text-align: left; /* На компах сдвигаем влево, к тексту */
-    }
-    .sticky-header h1 { font-size: 46px; }
-    .sticky-header h2 { font-size: 42px; padding-left: 20px; }
+
+    
 }
 
 @media (min-width: 1024px) {
